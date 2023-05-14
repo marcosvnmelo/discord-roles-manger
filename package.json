@@ -1,0 +1,103 @@
+{
+  "name": "discord-roles",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node ace serve --watch",
+    "vite:dev": "vite",
+    "build": "node ace build --production --tsconfig tsconfig.build.json",
+    "vite:build": "vite build",
+    "prebuild": "yarn vite:build",
+    "start": "node server.js",
+    "test": "node ace test",
+    "lint": "eslint . --ext=.ts --ext=.tsx",
+    "format": "prettier --write ."
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:adonis/typescriptApp",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "error"
+      ]
+    }
+  },
+  "eslintIgnore": [
+    "build"
+  ],
+  "prettier": {
+    "trailingComma": "es5",
+    "semi": true,
+    "singleQuote": true,
+    "useTabs": false,
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "printWidth": 100
+  },
+  "devDependencies": {
+    "@adonisjs/assembler": "^5.9.5",
+    "@japa/preset-adonis": "^1.2.0",
+    "@japa/runner": "^2.5.1",
+    "@types/proxy-addr": "^2.0.0",
+    "@types/source-map-support": "^0.5.6",
+    "@vitejs/plugin-react": "^4.0.0",
+    "adonis-preset-ts": "^2.1.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.39.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-adonis": "^2.1.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "pino-pretty": "^10.0.0",
+    "postcss": "^8.4.23",
+    "prettier": "^2.8.8",
+    "tailwindcss": "^3.3.2",
+    "typescript": "~4.6",
+    "vite": "^4.3.3",
+    "youch": "^3.2.3",
+    "youch-terminal": "^2.2.0"
+  },
+  "dependencies": {
+    "@91codes/adonis-vite": "^0.3.2",
+    "@adonisjs/ally": "^4.1.5",
+    "@adonisjs/auth": "^8.2.3",
+    "@adonisjs/bouncer": "^2.3.0",
+    "@adonisjs/core": "^5.8.0",
+    "@adonisjs/lucid": "^18.3.0",
+    "@adonisjs/redis": "^7.3.2",
+    "@adonisjs/repl": "^3.1.0",
+    "@adonisjs/session": "^6.2.0",
+    "@adonisjs/shield": "^7.0.0",
+    "@adonisjs/view": "^6.1.0",
+    "@discordjs/core": "^0.6.0",
+    "@discordjs/rest": "^1.7.1",
+    "@eidellev/inertia-adonisjs": "^8.0.1",
+    "@headlessui/react": "^1.7.14",
+    "@hookform/resolvers": "^3.1.0",
+    "@inertiajs/react": "^1.0.6",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.1",
+    "adonis-lucid-filter": "^4.1.0",
+    "adonis-lucid-soft-deletes": "^1.4.3",
+    "adonis-sail": "^0.0.7",
+    "axios": "^1.4.0",
+    "clsx": "^1.2.1",
+    "discord-api-types": "^0.37.41",
+    "flowbite": "^1.6.5",
+    "luxon": "^3.3.0",
+    "pg": "^8.10.0",
+    "proxy-addr": "^2.0.7",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
+    "react-if": "^4.1.4",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.21",
+    "zod": "^3.21.4"
+  }
+}
