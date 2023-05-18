@@ -12,7 +12,6 @@ const Home: React.FC = () => {
   return (
     <Main>
       <nav className="flex justify-center px-6 py-8 mx-auto lg:py-0">
-        <h1 className="text-white mr-4">Home</h1>
         <Link href="/servers">
           <h1 className="text-white">Servers</h1>
         </Link>
