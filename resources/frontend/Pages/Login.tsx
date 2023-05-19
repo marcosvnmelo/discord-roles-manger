@@ -24,18 +24,9 @@ const Login: React.FC = () => {
     resolver: zodResolver(schema),
   });
 
-  const {
-    props: { errors: pageErrors },
-  } = usePage<PageGlobalProps>();
-
   const onSubmit = useCallback((data: FormValues) => {
-    console.log(data);
     router.post('/login', data);
   }, []);
-
-  useEffect(() => {
-    console.log(pageErrors);
-  }, [pageErrors]);
 
   return (
     <Auth>

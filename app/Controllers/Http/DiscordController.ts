@@ -16,8 +16,6 @@ export default class DiscordsController {
         guildId = /.+guild_id=(\d+).*/.exec(request.request.url)?.[1] || '';
       }
 
-      console.log(guildId);
-
       const discord = ally.use('discord');
 
       if (discord.accessDenied()) {
@@ -84,17 +82,11 @@ export default class DiscordsController {
           })
           .save();
 
-        console.log('guildId', {
-          discordUser,
-          guildId,
-        });
-
         return response.redirect(`/servers/${guildId}`);
       }
 
       response.redirect().toRoute('home');
     } catch (error) {
-      console.log(error);
       return 'Unable to authenticate. Try again later';
     }
   }

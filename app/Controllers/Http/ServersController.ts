@@ -1,13 +1,16 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
+import { ValidationException } from '@ioc:Adonis/Core/Validator';
 import api from '@ioc:Lib/Discord';
 
 export default class ServersController {
-  public async index({ auth, inertia, session }: HttpContextContract) {
+  public async index({ auth, inertia }: HttpContextContract) {
     try {
       const userDiscordToken = auth.user?.discordToken;
 
       if (!userDiscordToken) {
-        throw new Error('Missing discord token');
+        throw new ValidationException(true, {
+          errors: ['Missing discord token'],
+        });
       }
 
       const guilds = await api.listUserGuilds(userDiscordToken);
@@ -16,9 +19,9 @@ export default class ServersController {
         guilds,
       });
     } catch (error) {
-      session.flash('errors', ['Error while fetching servers']);
-
-      return inertia.redirectBack();
+      throw new ValidationException(true, {
+        errors: ['Error while fetching servers', error.message],
+      });
     }
   }
 
@@ -26,12 +29,14 @@ export default class ServersController {
 
   // public async store({}: HttpContextContract) {}
 
-  public async show({ request, inertia, session }: HttpContextContract) {
+  public async show({ request, inertia }: HttpContextContract) {
     try {
       const { id } = request.params();
 
       if (!id) {
-        throw new Error('Missing server id');
+        throw new ValidationException(true, {
+          errors: ['Missing server id'],
+        });
       }
 
       const guild = await api.getGuild(id);
@@ -43,11 +48,9 @@ export default class ServersController {
         members,
       });
     } catch (error) {
-      session.flash('errors', ['Error while fetching server']);
-
-      console.log('error', error);
-
-      return inertia.redirectBack();
+      throw new ValidationException(true, {
+        errors: ['Error while fetching server', error.message],
+      });
     }
   }
 

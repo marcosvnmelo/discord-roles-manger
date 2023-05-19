@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link, router } from '@inertiajs/react';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { If, Then } from 'react-if';
 import { z } from 'zod';
@@ -34,13 +34,8 @@ const SignUp: React.FC = () => {
   });
 
   const onSubmit = useCallback((data: FormValues) => {
-    console.log(data);
     router.post('/users', data);
   }, []);
-
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <Auth>
