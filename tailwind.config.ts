@@ -1,6 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import type { Config } from 'tailwindcss';
+
+export default <Partial<Config>>{
   content: ['./resources/**/*.edge', './resources/**/*.{js,ts,jsx,tsx}'],
+  plugins: [require('flowbite/plugin')],
   theme: {
     extend: {
       colors: {
@@ -18,5 +20,4 @@ module.exports = {
       },
     },
   },
-  plugins: [require('flowbite/plugin')],
 };
