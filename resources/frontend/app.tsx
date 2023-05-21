@@ -1,6 +1,7 @@
 import { createInertiaApp } from '@inertiajs/react';
 import 'flowbite';
 import { createRoot } from 'react-dom/client';
+import 'react-toastify/dist/ReactToastify.css';
 import './styles/app.css';
 
 export function resolvePageComponent(name: string, pages: any[]) {

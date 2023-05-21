@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
+import { ValidationException } from '@ioc:Adonis/Core/Validator';
 import User from 'App/Models/User';
 
 export default class DiscordsController {
@@ -37,7 +38,9 @@ export default class DiscordsController {
       if (!userByDiscordId && !auth.isAuthenticated) {
         session.flash('errors', ['You need to register first']);
 
-        response.redirect('/login');
+        throw new ValidationException(true, {
+          errors: ['You need to register first'],
+        });
       }
 
       if (userByDiscordId && !auth.isAuthenticated) {
@@ -82,12 +85,16 @@ export default class DiscordsController {
           })
           .save();
 
+        session.flash('success', ['Successfully added to server']);
+
         return response.redirect(`/servers/${guildId}`);
       }
 
+      session.flash('success', ['Successfully logged in']);
+
       response.redirect().toRoute('home');
     } catch (error) {
-      return 'Unable to authenticate. Try again later';
+      response.redirect('/login');
     }
   }
 

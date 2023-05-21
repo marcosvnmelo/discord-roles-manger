@@ -1,5 +1,7 @@
 import { Breadcrumb } from 'flowbite-react';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
+import Flash from '../componentes/atoms/Flash';
+import CustomToastContainer from '../services/toast';
 
 const Main: React.FC<PropsWithChildren> = ({ children }) => {
   const [path, setPath] = useState<
@@ -41,6 +43,8 @@ const Main: React.FC<PropsWithChildren> = ({ children }) => {
         </Breadcrumb>
         {children}
       </div>
+      <CustomToastContainer />
+      <Flash />
     </div>
   );
 };
