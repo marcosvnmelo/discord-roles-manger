@@ -7,6 +7,7 @@ import { PageGlobalProps } from '.';
 
 export interface ServersPageProps extends PageGlobalProps {
   guilds: RESTGetAPICurrentUserGuildsResult;
+  guildsWithPermissions: Record<string, boolean>;
 }
 
 export interface ServerPageProps extends PageGlobalProps {

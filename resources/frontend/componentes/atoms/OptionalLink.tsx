@@ -3,15 +3,21 @@ import React, { PropsWithChildren } from 'react';
 
 type OptionalLinkProps = {
   href: string;
+  external?: boolean;
   disabled?: boolean;
 };
 
 const OptionalLink: React.FC<PropsWithChildren<OptionalLinkProps>> = ({
   children,
   href,
+  external,
   disabled,
 }) => {
-  return disabled ? <>{children}</> : <Link href={href}>{children}</Link>;
+  if (disabled) {
+    return <>{children}</>;
+  }
+
+  return external ? <a href={href}>{children}</a> : <Link href={href}>{children}</Link>;
 };
 
 export default OptionalLink;

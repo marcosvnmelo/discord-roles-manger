@@ -1,3 +1,4 @@
+import Redis from '@ioc:Adonis/Addons/Redis';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import { ValidationException } from '@ioc:Adonis/Core/Validator';
 import api from '@ioc:Lib/Discord';
@@ -15,8 +16,24 @@ export default class ServersController {
 
       const guilds = await api.listUserGuilds(userDiscordToken);
 
+      const guildsWithPermissionsList = await Promise.all(
+        guilds.map(async guild => {
+          const hasAccess = await Redis.get(`guild:${guild.id}:user:${auth.user!.id}`);
+
+          return {
+            [guild.id]: hasAccess === 'true',
+          };
+        })
+      );
+
+      const guildsWithPermissions = guildsWithPermissionsList.reduce(
+        (acc, curr) => ({ ...acc, ...curr }),
+        {}
+      );
+
       return inertia.render('Servers', {
         guilds,
+        guildsWithPermissions,
       });
     } catch (error) {
       throw new ValidationException(true, {
