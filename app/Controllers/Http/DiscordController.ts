@@ -1,3 +1,4 @@
+import Redis from '@ioc:Adonis/Addons/Redis';
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext';
 import { ValidationException } from '@ioc:Adonis/Core/Validator';
 import User from 'App/Models/User';
@@ -17,21 +18,7 @@ export default class DiscordsController {
         guildId = /.+guild_id=(\d+).*/.exec(request.request.url)?.[1] || '';
       }
 
-      const discord = ally.use('discord');
-
-      if (discord.accessDenied()) {
-        return 'Access was denied';
-      }
-
-      if (discord.stateMisMatch()) {
-        return 'Request expired. Retry again';
-      }
-
-      if (discord.hasError()) {
-        return discord.getError();
-      }
-
-      const discordUser = await discord.user();
+      const discordUser = await this.handleDiscordAlly(ally);
 
       const userByDiscordId = await User.findBy('discord_id', discordUser.id);
 
@@ -85,6 +72,8 @@ export default class DiscordsController {
           })
           .save();
 
+        Redis.set(`guild:${guildId}:user:${auth.user!.id}`, 'true');
+
         session.flash('success', ['Successfully added to server']);
 
         return response.redirect(`/servers/${guildId}`);
@@ -107,5 +96,29 @@ export default class DiscordsController {
           .scopes(['identify', 'guilds', 'guilds.members.read', 'bot'])
           .param('permissions', '268435504')
       );
+  }
+
+  private handleDiscordAlly(ally: HttpContextContract['ally']) {
+    const discord = ally.use('discord');
+
+    if (discord.accessDenied()) {
+      throw new ValidationException(true, {
+        errors: ['Access was denied'],
+      });
+    }
+
+    if (discord.stateMisMatch()) {
+      throw new ValidationException(true, {
+        errors: ['Request expired. Retry again'],
+      });
+    }
+
+    if (discord.hasError()) {
+      throw new ValidationException(true, {
+        errors: [discord.getError()],
+      });
+    }
+
+    return discord.user();
   }
 }
