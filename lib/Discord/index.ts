@@ -21,7 +21,10 @@ export default class Discord {
   }
 
   public getGuildMembers(id: string) {
-    return this.api.guilds.getMembers(id);
+    return this.api.guilds.getMembers(id, {
+      after: undefined,
+      limit: 1000,
+    });
   }
 
   private async manualApiGet<T>(token: string, url: string): Promise<T> {
