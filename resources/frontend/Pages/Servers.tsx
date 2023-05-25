@@ -20,7 +20,9 @@ const Servers: React.FC = () => {
             <li key={guild.id}>
               <OptionalLink
                 href={
-                  guildsWithPermissions[guild.id] ? `/servers/${guild.id}` : '/discord/bot/redirect'
+                  guildsWithPermissions[guild.id]
+                    ? `/servers/${guild.id}`
+                    : '/discord/bot/redirect'
                 }
                 external={!guildsWithPermissions[guild.id]}
                 disabled={!guild.owner}

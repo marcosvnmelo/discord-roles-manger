@@ -7,7 +7,12 @@
 
 import type { Config } from '@japa/runner';
 import TestUtils from '@ioc:Adonis/Core/TestUtils';
-import { assert, runFailedTests, specReporter, apiClient } from '@japa/preset-adonis';
+import {
+  assert,
+  runFailedTests,
+  specReporter,
+  apiClient,
+} from '@japa/preset-adonis';
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +25,11 @@ import { assert, runFailedTests, specReporter, apiClient } from '@japa/preset-ad
 | Feel free to remove existing plugins or add more.
 |
 */
-export const plugins: Required<Config>['plugins'] = [assert(), runFailedTests(), apiClient()];
+export const plugins: Required<Config>['plugins'] = [
+  assert(),
+  runFailedTests(),
+  apiClient(),
+];
 
 /*
 |--------------------------------------------------------------------------

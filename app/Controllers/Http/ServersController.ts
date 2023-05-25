@@ -20,7 +20,9 @@ export default class ServersController {
 
       const guildsWithPermissionsList = await Promise.all(
         guilds.map(async guild => {
-          const hasAccess = await Redis.get(`guild:${guild.id}:user:${auth.user!.id}`);
+          const hasAccess = await Redis.get(
+            `guild:${guild.id}:user:${auth.user!.id}`
+          );
 
           return {
             [guild.id]: hasAccess === 'true',

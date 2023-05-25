@@ -16,9 +16,17 @@ export function resolvePageComponent(name: string, pages: any[]) {
 
 createInertiaApp({
   resolve: name => {
-    return resolvePageComponent(name, (import.meta as any).glob('./Pages/**/*.tsx'));
+    return resolvePageComponent(
+      name,
+      (import.meta as any).glob('./Pages/**/*.tsx')
+    );
   },
   setup({ el, App, props }) {
     createRoot(el).render(<App {...props} />);
   },
-});
+}).catch(err =>
+  setTimeout(() => {
+    console.error(err);
+    window.location.reload();
+  }, 1000)
+);

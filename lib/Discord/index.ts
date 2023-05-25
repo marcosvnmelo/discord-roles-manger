@@ -1,7 +1,10 @@
 import { API } from '@discordjs/core';
 import { REST } from '@discordjs/rest';
 import { Axios } from 'axios';
-import { RESTGetAPICurrentUserGuildsResult, Routes } from 'discord-api-types/v10';
+import {
+  RESTGetAPICurrentUserGuildsResult,
+  Routes,
+} from 'discord-api-types/v10';
 
 export default class Discord {
   protected api: API;
@@ -13,7 +16,10 @@ export default class Discord {
   }
 
   public listUserGuilds(userToken: string) {
-    return this.manualApiGet<RESTGetAPICurrentUserGuildsResult>(userToken, Routes.userGuilds());
+    return this.manualApiGet<RESTGetAPICurrentUserGuildsResult>(
+      userToken,
+      Routes.userGuilds()
+    );
   }
 
   public getGuild(id: string) {
@@ -31,7 +37,11 @@ export default class Discord {
     return this.api.guilds.addRoleToMember(guildId, memberId, roleId);
   }
 
-  public removeRoleFromMember(guildId: string, memberId: string, roleId: string) {
+  public removeRoleFromMember(
+    guildId: string,
+    memberId: string,
+    roleId: string
+  ) {
     return this.api.guilds.removeRoleFromMember(guildId, memberId, roleId);
   }
 

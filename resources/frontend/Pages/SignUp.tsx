@@ -10,7 +10,9 @@ const schema = z
   .object({
     email: z.string().email('Email inválido'),
     password: z.string().min(8, 'Senha deve ter no mínimo 8 caracteres'),
-    password_confirmation: z.string().min(8, 'Senha deve ter no mínimo 8 caracteres'),
+    password_confirmation: z
+      .string()
+      .min(8, 'Senha deve ter no mínimo 8 caracteres'),
   })
   .superRefine((data, ctx) => {
     if (data.password !== data.password_confirmation) {
@@ -57,7 +59,10 @@ const SignUp: React.FC = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create and account
               </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
+              <form
+                className="space-y-4 md:space-y-6"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -74,7 +79,9 @@ const SignUp: React.FC = () => {
                   />
                   <If condition={!!errors.email}>
                     <Then>
-                      <p className="text-sm text-red-500">{errors.email?.message}</p>
+                      <p className="text-sm text-red-500">
+                        {errors.email?.message}
+                      </p>
                     </Then>
                   </If>
                 </div>
@@ -94,7 +101,9 @@ const SignUp: React.FC = () => {
                   />
                   <If condition={!!errors.password}>
                     <Then>
-                      <p className="text-sm text-red-500">{errors.password?.message}</p>
+                      <p className="text-sm text-red-500">
+                        {errors.password?.message}
+                      </p>
                     </Then>
                   </If>
                 </div>
@@ -130,7 +139,10 @@ const SignUp: React.FC = () => {
                     />
                   </div>
                   <div className="ml-3 text-sm">
-                    <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">
+                    <label
+                      htmlFor="terms"
+                      className="font-light text-gray-500 dark:text-gray-300"
+                    >
                       I accept the{' '}
                       <a
                         className="font-medium text-primary-600 hover:underline dark:text-primary-500"

@@ -1,10 +1,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Link, router, usePage } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import clsx from 'clsx';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { If, Then } from 'react-if';
-import { PageGlobalProps } from 'resources/../@types/page';
 import { z } from 'zod';
 import Auth from '../Layouts/Auth';
 
@@ -48,7 +47,10 @@ const Login: React.FC = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(onSubmit)}>
+              <form
+                className="space-y-4 md:space-y-6"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div>
                   <label
                     htmlFor="email"
@@ -67,7 +69,9 @@ const Login: React.FC = () => {
                   />
                   <If condition={!!errors.email}>
                     <Then>
-                      <p className="text-sm text-red-500">{errors.email?.message}</p>
+                      <p className="text-sm text-red-500">
+                        {errors.email?.message}
+                      </p>
                     </Then>
                   </If>
                 </div>
@@ -87,7 +91,9 @@ const Login: React.FC = () => {
                   />
                   <If condition={!!errors.password}>
                     <Then>
-                      <p className="text-sm text-red-500">{errors.password?.message}</p>
+                      <p className="text-sm text-red-500">
+                        {errors.password?.message}
+                      </p>
                     </Then>
                   </If>
                 </div>

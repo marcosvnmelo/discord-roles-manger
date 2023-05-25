@@ -7,10 +7,18 @@ export default class DiscordsController {
   public async redirect({ ally }: HttpContextContract) {
     return ally
       .use('discord')
-      .redirect(request => request.scopes(['identify', 'guilds', 'guilds.members.read']));
+      .redirect(request =>
+        request.scopes(['identify', 'guilds', 'guilds.members.read'])
+      );
   }
 
-  public async callback({ ally, auth, response, request, session }: HttpContextContract) {
+  public async callback({
+    ally,
+    auth,
+    response,
+    request,
+    session,
+  }: HttpContextContract) {
     try {
       let guildId = '';
 
@@ -29,7 +37,10 @@ export default class DiscordsController {
       }
 
       if (userByDiscordId && !auth.isAuthenticated) {
-        if ((userByDiscordId.discordTokenExpiresAt?.diffNow().toMillis() || 0) <= 0) {
+        if (
+          (userByDiscordId.discordTokenExpiresAt?.diffNow().toMillis() || 0) <=
+          0
+        ) {
           await userByDiscordId
             .merge({
               discordUsername: discordUser.nickName,

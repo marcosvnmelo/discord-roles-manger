@@ -30,7 +30,9 @@ const Server: React.FC = () => {
                 type="button"
                 className="flex items-center py-2 px-6 rounded cursor-pointer w-full enabled:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={() => handleUserButtonClick(member)}
-                disabled={member.user?.bot || member.user?.id === guild.owner_id}
+                disabled={
+                  member.user?.bot ?? member.user?.id === guild.owner_id
+                }
               >
                 <If condition={member.user?.avatar}>
                   <Then>
@@ -52,14 +54,20 @@ const Server: React.FC = () => {
                 {member.user?.username}
 
                 <When condition={member.user?.bot}>{' (BOT)'}</When>
-                <When condition={member.user?.id === guild.owner_id}>{' (OWNER)'}</When>
+                <When condition={member.user?.id === guild.owner_id}>
+                  {' (OWNER)'}
+                </When>
               </button>
             </li>
           ))}
         </ul>
       </main>
 
-      <RolesModal guild={guild} member={member} onClose={() => setMember(null)} />
+      <RolesModal
+        guild={guild}
+        member={member}
+        onClose={() => setMember(null)}
+      />
     </Main>
   );
 };

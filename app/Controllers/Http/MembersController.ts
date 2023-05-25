@@ -16,8 +16,12 @@ export default class MembersController {
       const memberId = request.param('id');
 
       await Promise.all([
-        ...rolesToAdd.map(roleId => api.addRoleToMember(guildId, memberId, roleId)),
-        ...rolesToRemove.map(roleId => api.removeRoleFromMember(guildId, memberId, roleId)),
+        ...rolesToAdd.map(roleId =>
+          api.addRoleToMember(guildId, memberId, roleId)
+        ),
+        ...rolesToRemove.map(roleId =>
+          api.removeRoleFromMember(guildId, memberId, roleId)
+        ),
       ]);
 
       inertia.location(`/servers/${guildId}`);

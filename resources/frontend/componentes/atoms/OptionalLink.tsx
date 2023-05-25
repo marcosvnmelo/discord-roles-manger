@@ -17,7 +17,11 @@ const OptionalLink: React.FC<PropsWithChildren<OptionalLinkProps>> = ({
     return <>{children}</>;
   }
 
-  return external ? <a href={href}>{children}</a> : <Link href={href}>{children}</Link>;
+  return external ? (
+    <a href={href}>{children}</a>
+  ) : (
+    <Link href={href}>{children}</Link>
+  );
 };
 
 export default OptionalLink;

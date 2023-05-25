@@ -28,16 +28,19 @@ const Main: React.FC<PropsWithChildren> = ({ children }) => {
     <div className="dark">
       <div className="md:h-screen bg-gray-50 dark:bg-gray-900">
         <Breadcrumb className="bg-gray-100 dark:bg-gray-800">
-          <Breadcrumb.Item href="/" className="text-gray-500 dark:text-gray-400">
+          <Breadcrumb.Item
+            href="/"
+            className="text-gray-500 dark:text-gray-400"
+          >
             Home
           </Breadcrumb.Item>
-          {path.map((x, i) => (
+          {path.map((p, i) => (
             <Breadcrumb.Item
-              key={i}
-              href={i === path.length - 1 ? undefined : x.url}
+              key={p.name}
+              href={i === path.length - 1 ? undefined : p.url}
               className="text-gray-500 dark:text-gray-400"
             >
-              {x.name}
+              {p.name}
             </Breadcrumb.Item>
           ))}
         </Breadcrumb>

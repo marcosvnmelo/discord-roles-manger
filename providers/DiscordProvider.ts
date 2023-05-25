@@ -27,7 +27,9 @@ export default class DiscordProvider {
   public register() {
     // Register your own bindings
     this.app.container.singleton('Lib/Discord', () => {
-      const config = this.app.container.use('Adonis/Core/Config').get('discord') as DiscordConfig;
+      const config = this.app.container
+        .use('Adonis/Core/Config')
+        .get('discord') as DiscordConfig;
 
       return new Discord(config.token);
     });

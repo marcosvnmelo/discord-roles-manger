@@ -38,9 +38,13 @@ const RolesModal: React.FC<RolesModalProps> = ({ guild, member, onClose }) => {
   );
 
   const onSave = useCallback(() => {
-    const rolesToAdd = userRoles.filter(role => !initialUserRoles.includes(role));
+    const rolesToAdd = userRoles.filter(
+      role => !initialUserRoles.includes(role)
+    );
 
-    const rolesToRemove = initialUserRoles.filter(role => !userRoles.includes(role));
+    const rolesToRemove = initialUserRoles.filter(
+      role => !userRoles.includes(role)
+    );
 
     if (!rolesToAdd.length && !rolesToRemove.length) {
       return;
@@ -68,7 +72,9 @@ const RolesModal: React.FC<RolesModalProps> = ({ guild, member, onClose }) => {
       )
     );
 
-    const initialRoles = guild.roles.filter(role => member?.roles.includes(role.id));
+    const initialRoles = guild.roles.filter(role =>
+      member?.roles.includes(role.id)
+    );
 
     setInitialUserRoles(initialRoles);
     setUserRoles(initialRoles);
@@ -81,7 +87,11 @@ const RolesModal: React.FC<RolesModalProps> = ({ guild, member, onClose }) => {
         <Dialog.Panel className="w-full max-w-5xl overflow-hidden bg-gray-800 rounded-lg p-6">
           <Dialog.Title className="flex justify-between items-center px-6 text-2xl font-bold text-white">
             Roles
-            <button type="button" className="text-white hover:text-gray-400" onClick={onClose}>
+            <button
+              type="button"
+              className="text-white hover:text-gray-400"
+              onClick={onClose}
+            >
               ×
             </button>
           </Dialog.Title>
@@ -90,7 +100,9 @@ const RolesModal: React.FC<RolesModalProps> = ({ guild, member, onClose }) => {
             <div className="flex items-center justify-between min-h-[20rem]">
               {/* Guild roles */}
               <div className="flex flex-col min-h-full">
-                <h3 className="text-xl font-bold text-white text-center mb-2">Server Roles</h3>
+                <h3 className="text-xl font-bold text-white text-center mb-2">
+                  Server Roles
+                </h3>
                 <ul className="text-white max-w-lg border border-gray-700 rounded min-w-[12.5rem] min-h-[12.5rem]">
                   {guildRoles.map(role => (
                     <li key={role.id}>
@@ -114,7 +126,9 @@ const RolesModal: React.FC<RolesModalProps> = ({ guild, member, onClose }) => {
 
               {/* User roles */}
               <div className="ml-8 flex flex-col min-h-full">
-                <h3 className="text-xl font-bold text-white text-center mb-2">User Roles</h3>
+                <h3 className="text-xl font-bold text-white text-center mb-2">
+                  User Roles
+                </h3>
                 <ul className="text-white max-w-lg border border-gray-700 rounded min-w-[12.5rem] min-h-[12.5rem]">
                   {userRoles?.map(role => (
                     <li key={role.id}>
