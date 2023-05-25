@@ -9,6 +9,8 @@ export default class ServersController {
       const userDiscordToken = auth.user?.discordToken;
 
       if (!userDiscordToken) {
+        inertia.redirectBack();
+
         throw new ValidationException(true, {
           errors: ['Missing discord token'],
         });
@@ -36,6 +38,8 @@ export default class ServersController {
         guildsWithPermissions,
       });
     } catch (error) {
+      inertia.redirectBack();
+
       throw new ValidationException(true, {
         errors: ['Error while fetching servers', error.message],
       });
@@ -51,6 +55,8 @@ export default class ServersController {
       const { id } = request.params();
 
       if (!id) {
+        inertia.redirectBack();
+
         throw new ValidationException(true, {
           errors: ['Missing server id'],
         });
@@ -65,6 +71,8 @@ export default class ServersController {
         members,
       });
     } catch (error) {
+      inertia.redirectBack();
+
       throw new ValidationException(true, {
         errors: ['Error while fetching server', error.message],
       });

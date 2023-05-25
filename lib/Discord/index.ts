@@ -27,6 +27,14 @@ export default class Discord {
     });
   }
 
+  public addRoleToMember(guildId: string, memberId: string, roleId: string) {
+    return this.api.guilds.addRoleToMember(guildId, memberId, roleId);
+  }
+
+  public removeRoleFromMember(guildId: string, memberId: string, roleId: string) {
+    return this.api.guilds.removeRoleFromMember(guildId, memberId, roleId);
+  }
+
   private async manualApiGet<T>(token: string, url: string): Promise<T> {
     const axios = new Axios({
       baseURL: 'https://discord.com/api/v10',

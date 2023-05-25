@@ -21,6 +21,7 @@
 import Route from '@ioc:Adonis/Core/Route';
 import './auth';
 import './discord';
+import './member';
 import './server';
 
 Route.get('/', async ({ inertia }) => {

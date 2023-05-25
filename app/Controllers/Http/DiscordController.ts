@@ -23,8 +23,6 @@ export default class DiscordsController {
       const userByDiscordId = await User.findBy('discord_id', discordUser.id);
 
       if (!userByDiscordId && !auth.isAuthenticated) {
-        session.flash('errors', ['You need to register first']);
-
         throw new ValidationException(true, {
           errors: ['You need to register first'],
         });
@@ -72,7 +70,7 @@ export default class DiscordsController {
           })
           .save();
 
-        Redis.set(`guild:${guildId}:user:${auth.user!.id}`, 'true');
+        await Redis.set(`guild:${guildId}:user:${auth.user!.id}`, 'true');
 
         session.flash('success', ['Successfully added to server']);
 
